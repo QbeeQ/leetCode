@@ -19,8 +19,8 @@
 class Solution:
     @staticmethod
     def twoSum(nums: list[int], target: int) -> list[int]:
-        for i, n in enumerate(nums):
-            delta = target - n
+        for i, num in enumerate(nums):
+            delta = target - num
             if delta in nums[i+1:]:
                 return [i, nums.index(delta, i+1)]
         return []
