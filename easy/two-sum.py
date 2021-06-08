@@ -26,7 +26,9 @@ class Solution:
         return []
 
 class Tester:
+
     def __init__(self) -> None:
+        self.res = ("FAIL", "PASS")
         self.examples = [
             ([2,7,11,15], 9, [0,1]),
             ([3,2,4], 6, [1,2]),
@@ -42,10 +44,10 @@ class Tester:
             result = Solution.twoSum(nums, target)
             test_result = self.compare(reference, result)
             all_tests_result = min(all_tests_result, test_result)
-            print(f"{'PASS' if test_result else 'FAIL'}\ttwoSum({nums}, {target}) = {result} (reference: {reference})")
+            print(f"{self.res[test_result]}\ttwoSum({nums}, {target}) = {result} (reference: {reference})")
         return all_tests_result
 
 t  = Tester()
 t.examples.append(([2,5,2,3],5,[0,3]))
 t.examples.append(([2,5,2,3],9,[]))
-t.test()
+print(f"Test result: {t.res[t.test()]}")
