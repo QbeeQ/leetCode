@@ -17,26 +17,27 @@ class Test:
             result = f'{result}{separator}{p}'
         return result
 
-    def run(self, mute=True) -> bool:
+    def run(self, detail=True) -> bool:
         all_tests_result = True
         for parameters, reference in self.examples:
             result = self.method(*parameters)
             test_result = self.compare(reference, result)
             all_tests_result = min(all_tests_result, test_result)
-            if not mute:
+            if detail:
                 print(f"{self.res[test_result]}\t{self.method.__name__}({self.paramsToStr(parameters)}) = {result} (reference: {reference})")
         print(f'{self.method.__name__} test result: {self.res[all_tests_result]}')
         return all_tests_result
 
 import easy.twoSum
 import medium.AddTwoNumbers
+import medium.lengthOfLongestSubstring
 
 tests = [
     Test(easy.twoSum.twoSum, easy.twoSum.examples()),
-    Test(medium.AddTwoNumbers.addTwoNumbers,medium.AddTwoNumbers.examples()),
-    Test(medium.AddTwoNumbers.addTwoNumbers_off,medium.AddTwoNumbers.examples())
+    Test(medium.AddTwoNumbers.addTwoNumbers, medium.AddTwoNumbers.examples()),
+    Test(medium.lengthOfLongestSubstring.lengthOfLongestSubstring, medium.lengthOfLongestSubstring.examples())
 ]
 
 for t in tests:
-    t.run()
+    t.run(False)
 
