@@ -1,16 +1,42 @@
-class Tester:
-    def __init__(self) -> None:
+class Test:
+    def __init__(self, method, exapmples=[]) -> None:
         self.res = ("FAIL", "PASS")
-        self.examples = []
+        self.method = method
+        self.examples = exapmples
 
-    def compare(self, lst1, lst2) -> bool:
-        return str(lst1) == str(lst2)
+    def __str__(self):
+        return f'examples: {self.examples}'
 
-    def test(self, method) -> bool:
+    def compare(self, res1, res2) -> bool:
+        return str(res1) == str(res2)
+
+    def paramsToStr(self, parameters) -> str:
+        result = ''
+        for p in parameters:
+            separator = ', ' if result else ''
+            result = f'{result}{separator}{p}'
+        return result
+
+    def run(self, mute=True) -> bool:
         all_tests_result = True
         for parameters, reference in self.examples:
-            result = Solution().addTwoNumbers(l1, l2)
+            result = self.method(*parameters)
             test_result = self.compare(reference, result)
             all_tests_result = min(all_tests_result, test_result)
-            print(f"{self.res[test_result]}\taddTwoNumbers({l1}, {l2}) = {result} (reference: {reference})")
+            if not mute:
+                print(f"{self.res[test_result]}\t{self.method.__name__}({self.paramsToStr(parameters)}) = {result} (reference: {reference})")
+        print(f'{self.method.__name__} test result: {self.res[all_tests_result]}')
         return all_tests_result
+
+import easy.twoSum
+import medium.AddTwoNumbers
+
+tests = [
+    Test(easy.twoSum.twoSum, easy.twoSum.examples()),
+    Test(medium.AddTwoNumbers.addTwoNumbers,medium.AddTwoNumbers.examples()),
+    Test(medium.AddTwoNumbers.addTwoNumbers_off,medium.AddTwoNumbers.examples())
+]
+
+for t in tests:
+    t.run()
+
