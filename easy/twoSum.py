@@ -33,3 +33,6 @@ def examples() -> list:
         ( ([2,5,2,3],5), [0,3] ),
         ( ([2,5,2,3],9), [] )
     ]
+
+def testinfo():
+    return (twoSum, examples())

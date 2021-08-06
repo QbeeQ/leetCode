@@ -38,3 +38,6 @@ def examples() -> list:
         (("pwwkew",), 3),
         (("",), 0)
     ]
+
+def testinfo():
+    return (lengthOfLongestSubstring, examples())

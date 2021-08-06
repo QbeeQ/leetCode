@@ -91,3 +91,7 @@ def examples():
             ListNode(8, ListNode(9, ListNode(9, ListNode(9, ListNode(0, ListNode(0, ListNode(0, ListNode(1))))))))
         )
     ]
+
+
+def testinfo():
+    return (addTwoNumbers, examples())
